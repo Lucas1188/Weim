@@ -30,12 +30,6 @@ def parse_single_bug_from_output(output_text):
     Parse a single bug tuple from 'Final bug count: defaultdict(...)' in one line.
     Returns (bug_type, exception, message, file, line, count) or None
     """
-    # Match: {...}: count
-    # m = re.search(
-    #     r"Final bug count: defaultdict\(.*?,\s*\{\s*\('(?P<bug_type>.*?)',\s*<class '.*\.(?P<exception>\w+)'>,\s*'(?P<message>.*?)',\s*'(?P<file>.*?)',\s*(?P<line>\d+)\s*\)\s*:\s*(?P<count>\d+)\s*\}\)",
-    #     output_text,
-    #     re.DOTALL
-    # )
     m = re.search(
         r"Final bug count: defaultdict\(.*?,\s*\{\s*\("
         r"'(?P<bug_type>.*?)',\s*"

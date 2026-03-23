@@ -31,12 +31,15 @@ export HARNESS_ROOT_DIR=$(pwd)
 SEEDS_DIR="$HARNESS_ROOT_DIR/seeds"
 OUT_DIR="$HARNESS_ROOT_DIR/out"
 LOGS_DIR="$HARNESS_ROOT_DIR/logs"
+HARNESSLOG_DIR="$HARNESS_ROOT_DIR/harness_logs"
 FINAL_BUGS="$HARNESS_ROOT_DIR/final_bugs.json"
 ERROR_FILE="$HARNESS_ROOT_DIR/harness_error.txt"
 
 mkdir -p "$SEEDS_DIR" "$OUT_DIR" "$LOGS_DIR"
 
+rm -r $HARNESSLOG_DIR
 rm -r $LOGS_DIR
+rm -r $OUT_DIR
 rm $ERROR_FILE
 echo 0 > .lid
 # ----------------------
@@ -55,4 +58,4 @@ echo
 echo "[*] After fuzzing, package results with:"
 echo ./pack_logs.sh
 echo "./hound.py" > pack_logs.sh 
-echo "tar -czf \"${HARNESS_ROOT_DIR}/$(basename "$TARGET_BIN").tar.gz\" \"$OUT_DIR\" \"$LOGS_DIR\" \"$SEEDS_DIR\" \"$FINAL_BUGS\" \"$ERROR_FILE\"" >> pack_logs.sh
+echo "tar -czf \"${HARNESS_ROOT_DIR}/$(basename "$TARGET_BIN").tar.gz\" \"$OUT_DIR\" \"$HARNESSLOG_DIR\" \"$LOGS_DIR\" \"$SEEDS_DIR\" \"$FINAL_BUGS\" \"$ERROR_FILE\"" >> pack_logs.sh
