@@ -140,7 +140,7 @@ def main():
             bug_type, exc_class, message, file_path, line_no, count = bug
             key = (exc_class, file_path, line_no, bug_type)
             # Store only the first occurrence
-            if key not in distinct_bugs:
+            if key not in distinct_bugs and iteration in exec_info:
                 distinct_bugs[key] = {
                     "exception": exc_class,
                     "line": line_no,
@@ -152,7 +152,7 @@ def main():
                     "datetime_executed": timestamp
                 }
             else:
-                if distinct_bugs[key]['iteration']>iteration:
+                if key in distinct_bugs and distinct_bugs[key]['iteration']>iteration:
                     distinct_bugs[key]['iteration'] = iteration
                     distinct_bugs[key]['mutated_input'] = input_str
                     distinct_bugs[key]['datetime_executed'] = timestamp

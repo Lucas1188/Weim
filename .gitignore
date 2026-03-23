@@ -6,3 +6,5 @@ harness_logs
 *.json
 *.csv
 out
+harness_error.txt
+*.log
