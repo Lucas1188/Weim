@@ -89,6 +89,7 @@ def parse_single_bug_from_output_structured(output_text):
 
     except Exception:
         return None
+#
 # ================= MAIN =================
 def main():
     # Dictionary to store first occurrence of each distinct bug
@@ -167,3 +168,28 @@ def main():
 
 if __name__ == "__main__":
     main()
+    import json
+
+    log_file = "coverage_timeline.jsonl"
+    cumulative_blocks = set()
+    data_points = []
+
+    with open(log_file, "r") as f:
+        for line in f:
+            run_data = json.loads(line)
+            
+            # Add the blocks hit in this run to our cumulative set
+            cumulative_blocks.update(run_data["blocks_hit"])
+            
+            # Calculate the current cumulative coverage percentage
+            total_possible = run_data["total_blocks"]
+            current_coverage_pct = (len(cumulative_blocks) / total_possible) * 100
+            
+            data_points.append({
+                "iteration": run_data["iteration"],
+                "cumulative_pct": current_coverage_pct
+            })
+
+    print("Coverage Rate Over Time:")
+    for pt in data_points[::100]: # Print every 100th run to keep it readable
+        print(f"Run {pt['iteration']:05d} -> Coverage: {pt['cumulative_pct']:.2f}%")

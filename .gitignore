@@ -8,3 +8,6 @@ harness_logs
 out
 harness_error.txt
 *.log
+*test*
+pycdc
+tmp

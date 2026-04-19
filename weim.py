@@ -9,7 +9,7 @@ import time
 # ================= CONFIG =================
 # Environment-based configuration
 HARNESS_ROOT = os.getenv("HARNESS_ROOT_DIR", "/tmp")
-CIDRIZE_BIN = os.getenv("HARNESS_TGT")
+CIDRIZE_BIN = os.getenv("HARNESS_TGT").split()
 TIMEOUT = int(os.getenv("HARNESS_TIMEOUT", 5))
 HARNESS_ARGS = os.getenv("HARNESS_ARGS","").split()
 
@@ -61,15 +61,6 @@ def safe_log_id():
 # ================= MAIN =================
 # ================= MAIN =================
 def main():
-    # Dump all environment variables for debugging
-    # env_dump_file = Path(HARNESS_ROOT) / "env_dump.txt"
-    # try:
-    #     with open(env_dump_file, "w") as f:
-    #         for k, v in sorted(os.environ.items()):
-    #             f.write(f"{k}={v}\n")
-    # except Exception as e:
-    #     print(f"[Warning] Could not write env dump: {e}", file=sys.stderr)
-
     if len(sys.argv) < 2:
         log_harness_error("No input file specified")
         sys.exit(1)
@@ -90,7 +81,7 @@ def main():
         log_harness_error("HARNESS_TGT not set")
         return
 
-    cmd = [CIDRIZE_BIN] + HARNESS_ARGS + [input_data]
+    cmd = CIDRIZE_BIN + HARNESS_ARGS + [input_data]
 
     try:
         result = subprocess.run(
