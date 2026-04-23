@@ -351,7 +351,7 @@ if __name__ == "__main__":
     # --- 1. Read Target from run_weim.sh Environment ---
     target_path = os.getenv("HARNESS_TGT")
     if not target_path:
-        log_harness_error("HARNESS_TGT environment variable is not set! Did you run run_weim.sh?")
+        log_harness_error("HARNESS_TGT environment variable is not set! Did you run run_iggy.sh?")
         print("[!] Error: HARNESS_TGT not set.", file=sys.stderr)
         sys.exit(1)
 

@@ -1,7 +1,7 @@
 targets
 seeds
 *env*
-*.gz
+
 harness_logs
 *.json
 *.csv
