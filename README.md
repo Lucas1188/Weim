@@ -1,6 +1,6 @@
 # Weim AFL Wrapped Binary Harness
 
-This repository provides a harness (`weim.py`), packager (`hound.py`) and a helper scripts (`run_weim.sh`), (`pack_logs.sh`) for fuzzing specifically wrapped target binaries with AFL.
+This repository provides a harness (`weim.py`), packager (`hound.py`) and a helper scripts (`run_iggy.sh`), (`pack_logs.sh`) for fuzzing specifically wrapped target binaries with AFL.
 
 ---
 
@@ -18,7 +18,7 @@ This repository provides a harness (`weim.py`), packager (`hound.py`) and a help
 | File | Description |
 |------|-------------|
 | `weim.py` | Python harness that runs the target binary on AFL inputs and logs bugs. |
-| `run_weim.sh` | Bash script to set up environment variables and generate AFL commands. |
+| `run_iggy.sh` | Bash script to set up environment variables and generate AFL commands. |
 | `seeds/` | Directory for initial AFL seed inputs. |
 | `out/` | AFL output directory. |
 | `logs/` | Harness logs directory. |
@@ -30,7 +30,7 @@ This repository provides a harness (`weim.py`), packager (`hound.py`) and a help
 
 ### Source the script
 ```
-source ./run_weim.sh <target_binary> <timeout_per_input_sec> <max_fuzz_duration> "<harness_args>"
+source ./run_iggy.sh <target_binary> <timeout_per_input_sec> <max_fuzz_duration> "<harness_args>"
 ```
 | Argument | Description |
 |----------|-------------|
@@ -41,7 +41,7 @@ source ./run_weim.sh <target_binary> <timeout_per_input_sec> <max_fuzz_duration>
 
 ### Example:
 `
-source ./run_weim.sh cidrize-runner/bin/linux-cidrize-runner 5 4h "--func cidrize --ipstr"
+source ./run_iggy.sh cidrize-runner/bin/linux-cidrize-runner 5 4h "--func cidrize --ipstr"
 `
 
 This sets the following environment variables in your shell vital for the afl driver code to work properly:
